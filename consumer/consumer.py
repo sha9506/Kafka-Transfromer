@@ -6,19 +6,16 @@ import time
 import os
 import sys
 
-# Ensure stdout is flushed immediately
 sys.stdout.reconfigure(line_buffering=True)
 
 print("Consumer container started!", flush=True)
 
-# Get configuration from environment variables
 KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:29092")
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://root:example@mongodb:27017")
 
 print(f"Kafka bootstrap servers: {KAFKA_BOOTSTRAP_SERVERS}", flush=True)
 print(f"MongoDB URI: {MONGO_URI}", flush=True)
 
-# Retry logic for Kafka connection
 consumer = None
 retry_count = 0
 max_retries = 30
@@ -49,7 +46,6 @@ if consumer is None:
     print("Failed to connect to Kafka after maximum retries. Exiting.", flush=True)
     sys.exit(1)
 
-# Connect to MongoDB with retry logic
 mongo_client = None
 retry_count = 0
 
@@ -68,7 +64,6 @@ if mongo_client is None:
     print("Failed to connect to MongoDB after maximum retries. Exiting.", flush=True)
     sys.exit(1)
 
-# Setup database and collection
 raw_db = mongo_client["raw_employee_db"]
 raw_collection = raw_db["employees"]
 

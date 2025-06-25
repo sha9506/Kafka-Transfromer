@@ -5,19 +5,16 @@ import time
 import os
 import sys
 
-# Ensure stdout is flushed immediately
 sys.stdout.reconfigure(line_buffering=True)
 
 print("Producer container started!", flush=True)
 print("Python version:", sys.version, flush=True)
 print("Current working directory:", os.getcwd(), flush=True)
 
-# Get broker from env (set in docker-compose)
 BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:29092")
 
 print(f"Using Kafka bootstrap servers: {BOOTSTRAP_SERVERS}", flush=True)
 
-# Retry logic for Kafka connection
 while True:
     try:
         producer = KafkaProducer(
@@ -31,7 +28,6 @@ while True:
 
 topic = 'employee-data'
 
-# Batch of employee records
 employees = [
     {"emp_id": "E201", "name": "Raj Verma", "department": "Sales", "salary": 60000, "location": "Mumbai"},
     {"emp_id": "E202", "name": "Sara Thomas", "department": "HR", "salary": 55000, "location": "Delhi"},
@@ -40,7 +36,6 @@ employees = [
     {"emp_id": "E205", "name": "Vikram Singh", "department": "Support", "salary": 52000, "location": "Kolkata"}
 ]
 
-# Simulate ongoing stream (optional)
 while True:
     print("\nSending batch of employee records to Kafka...\n", flush=True)
     for emp in employees:
@@ -56,6 +51,4 @@ while True:
     print("Sleeping before next batch...\n", flush=True)
     time.sleep(30)
 
-# Cleanup if needed (not reached in loop case)
-# producer.flush()
-# producer.close()
+
