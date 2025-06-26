@@ -4,7 +4,7 @@
 This project implements a scalable, real-time data processing pipeline using Kafka, MongoDB, Kubernetes (Minikube/OpenShift), and Python. It simulates a message-driven architecture where employee records flow through multiple processing stages—ingestion, transformation, and storage—across distributed pods.
 
 # Problem Statement
-In many modern enterprise systems, raw data—especially employee-related data—is generated in high volume and often in inconsistent formats. Processing this data in real-time while ensuring accuracy, auditability, and fault tolerance becomes a challenge, particularly in distributed microservice environments.
+Raw data—especially employee-related data—is generated in high volume and often in inconsistent formats. Processing this data in real-time while ensuring accuracy, auditability, and fault tolerance becomes a challenge, particularly in distributed microservice environments.
 
 This project solves that problem by:
 
@@ -28,7 +28,6 @@ Polls MongoDB for unprocessed records. Applies transformation logic, enriches da
 Monitors MongoDB queue length or pod performance and scales transformer pods accordingly via Kubernetes APIs.
 
 # Tech Stacks
-
 Kafka – For decoupled message-based data ingestion and real-time streaming
 
 MongoDB – For storing raw and processed employee records with flexible schema
